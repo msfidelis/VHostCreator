@@ -11,6 +11,8 @@ TWITTER    :: https://twitter.com/fidelissauro
 
 S.O.       :: Debian 7, 8, Kali Linux 1.0, 2.0 e derivados
 
+Script adaptado do projeto: https://github.com/lauroguedes/vhautlinux
+
 ###########################################################
 # MODO DE USAR: 
 
