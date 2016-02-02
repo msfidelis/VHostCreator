@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#GERADOR AUTOMÁTICO DE VIRTUALHOSTS
+#GERADOR AUTOMÁTICO DE VIRTUALHOSTS PARA O SLACKWARE
 # AUTHOR     :: Matheus Fidelis
 # GITHUB     :: https://github.com/msfidelis
 # TWITTER    :: http://twitter.com.br/fidelissauro
-# S.O.       :: Debian 7, 8, Kali Linux 1.0, 2.0 e derivados
+# S.O.       :: SLACKWARE 14.*
 
 ###########################################################
 # MODO DE USAR: 
@@ -44,18 +44,13 @@ if [ -d "$DIRECTORY" ]; then
             ErrorLog ${APACHE_LOG_DIR}/$VHOST.error.log
             CustomLog ${APACHE_LOG_DIR}/$VHOST.access.log combined
     </VirtualHost>
-    " >> /etc/httpd/sites-available/$VHOST.conf
+    " >> /etc/httpd/httpd.conf
     
-    #CRIA O LINK SIMBÓLICO NA PASTA DE SITES PUBLICADOS
-    echo "[+] CRIANDO LINK SIMBÓLICO PARA PUBLICAR O SITE $VHOST"
-        ln -s /etc/httpd/sites-available/$VHOST.conf /etc/httpd/sites-enabled/$VHOST.conf
-
-
     echo "[+] HABILITANDO O VHOST NO SISTEMA"
     a2ensite $VHOST.conf
 
     echo "[+] REINICIANDO O APACHE"
-    systemctl /etc/rc.d/rc.httpd restart
+    /etc/rc.d/rc.httpd restart
     
 else 
     echo [-] DIRETÓRIO DO SITE NÃO ENCONTRADO... 
