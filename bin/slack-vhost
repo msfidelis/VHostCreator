@@ -17,42 +17,48 @@ while getopts 'h:d:' opt ; do
     d) DIRECTORY=$OPTARG ;;
   esac
 done
-
+HTTPDFILE='/etc/httpd/extra/httpd-vhosts.conf'
 
 #CRIA O REGISTRO NO ARQUIVO HOSTS
 echo "[+] CRIANDO O REGISTRO NO ARQUIVO HOSTS DO SISTEMA"
 echo "127.0.0.1     $VHOST" >> /etc/hosts
 
-echo $VHOST
-echo $DIRECTORY
+echo "[+] VIRTUAL HOST:              $VHOST"
+echo "[+] DIRETÓRIO DE REFERÊNCIA:   $DIRECTORY"
+
 
 if [ -d "$DIRECTORY" ]; then
     #CRIA O VIRTUALHOST
-    echo "[+] CRIANDO O VIRTUALHOST BASEADO APONTANDO PARA $DIRECTORY"
+    echo "[+] CRIANDO CONFIGURAÇÕES DO VIRTUALHOST EM:  $DIRECTORY"
     echo "
-    <VirtualHost *:80>
-            ServerName $VHOST
-            ServerAlias www.$VHOST
-            DocumentRoot $DIRECTORY
-            <Directory $DIRECTORY/>
-                    Options Indexes FollowSymLinks
-                    #MultiViews
-                    AllowOverride All
-                    Order allow,deny
-                    allow from all
-            </Directory>
-            ErrorLog ${APACHE_LOG_DIR}/$VHOST.error.log
-            CustomLog ${APACHE_LOG_DIR}/$VHOST.access.log combined
-    </VirtualHost>
+   <VirtualHost *:80>
+           ServerName $VHOST
+           ServerAlias www.$VHOST
+           DocumentRoot $DIRECTORY
+           <Directory $DIRECTORY/>
+                   Options Indexes FollowSymLinks
+                   #MultiViews
+                   AllowOverride All
+                   Order allow,deny
+                   allow from all
+           </Directory>
+           ErrorLog ${APACHE_LOG_DIR}/$VHOST.error.log
+           CustomLog ${APACHE_LOG_DIR}/$VHOST.access.log combined
+   </VirtualHost>
     
-    
-    " >> /etc/httpd/httpd.conf
+
+    " >> $HTTPDFILE
 
 
     echo "[+] REINICIANDO O APACHE"
     /etc/rc.d/rc.httpd restart
 
     echo "[+] KEEP SLACK :)"
+    echo ""
+    echo "======================"
+    echo "Twitter: @fidelissauro"
+    echo "Blogger: nanoshots.com.br"
+    echo "Github:  https://github.com/msfidelis"
 
 else 
     echo [-] DIRETÃ“RIO DO SITE NÃƒO ENCONTRADO... 
