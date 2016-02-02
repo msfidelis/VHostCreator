@@ -44,14 +44,16 @@ if [ -d "$DIRECTORY" ]; then
             ErrorLog ${APACHE_LOG_DIR}/$VHOST.error.log
             CustomLog ${APACHE_LOG_DIR}/$VHOST.access.log combined
     </VirtualHost>
-    " >> /etc/httpd/httpd.conf
     
-    echo "[+] HABILITANDO O VHOST NO SISTEMA"
-    a2ensite $VHOST.conf
+    
+    " >> /etc/httpd/httpd.conf
+
 
     echo "[+] REINICIANDO O APACHE"
     /etc/rc.d/rc.httpd restart
-    
+
+    echo "[+] KEEP SLACK :)"
+
 else 
     echo [-] DIRETÓRIO DO SITE NÃO ENCONTRADO... 
 fi
