@@ -55,7 +55,6 @@ else
       echo "[+] CRIANDO LINK SIMBÓLICO PARA PUBLICAR O SITE $VHOST"
           ln -s /etc/httpd/sites-available/$VHOST.conf /etc/httpd/sites-enabled/$VHOST.conf
 
-
       echo "[+] HABILITANDO O VHOST NO SISTEMA"
       a2ensite $VHOST.conf
 
