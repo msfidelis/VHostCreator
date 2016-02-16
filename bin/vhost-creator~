@@ -49,11 +49,11 @@ else
               ErrorLog ${APACHE_LOG_DIR}/$VHOST.error.log
               CustomLog ${APACHE_LOG_DIR}/$VHOST.access.log combined
       </VirtualHost>
-      " >> /etc/apache2/sites-available/$VHOST.conf
+      " >> /etc/httpd/sites-available/$VHOST.conf
 
       #CRIA O LINK SIMBÓLICO NA PASTA DE SITES PUBLICADOS
       echo "[+] CRIANDO LINK SIMBÓLICO PARA PUBLICAR O SITE $VHOST"
-          ln -s /etc/apache2/sites-available/$VHOST.conf /etc/apache2/sites-enabled/$VHOST.conf
+          ln -s /etc/httpd/sites-available/$VHOST.conf /etc/httpd/sites-enabled/$VHOST.conf
 
       echo "[+] HABILITANDO O VHOST NO SISTEMA"
       a2ensite $VHOST.conf
