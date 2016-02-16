@@ -59,7 +59,7 @@ else
       a2ensite $VHOST.conf
 
       echo "[+] REINICIANDO O APACHE"
-      systemctl /etc/rc.d/rc.httpd restart
+      systemctl restart apache2
 
   else
       echo [-] DIRETÓRIO DO SITE NÃO ENCONTRADO...
